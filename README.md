@@ -6,19 +6,25 @@ WordPress-Simple-MVC-Framework is under MIT Copyright (c) 2012 Zhehai He <hezahc
 version 0.9
 
 1. Installation:
-    a.  Please copy all the file to your theme folder.
-        Example:
+------------
+a.  Please copy all the file to your theme folder.
+
+    Example:
         Your project theme : \wp-content\themes\twentyeleven
         The MVC framework : \wp-content\themes\twentyeleven\framework
         After you install the mvc, the [mvc.ini.php] is at [\wp-content\themes\twentyeleven\framework\mvc.ini.php]
-    b.  The MVC also support Zend Framework and Smarty by default, to install them, please:
+
+b.  The MVC also support Zend Framework and Smarty by default, to install them, please:
+a
         I.  Zend Framework - Copy all the Zend framework files in \core\libs\Zend
         II. Smarty - Copy all the Smarty files in \core\libs\Smarty
 
 2. Settings:
+------------
     a.  Please read the file comments in framework\config
 
 3. How to use:
+------------
     a. In you functions.php: 
         <?php
         require_once(dirname(__FILE__).'/framework/mvc.ini.php');
@@ -37,6 +43,7 @@ version 0.9
         ?>
 
 4. How to developing:
+------------
     a. Load local class first:
         I.  framework\core\ is for core code
         II. framework\local\ is for project code
@@ -84,6 +91,7 @@ version 0.9
     e. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as [.tpl] uner [\views\]
     
 5. Build in useful extension:
+------------
     a. Data Validate + Filter Ext, please read the comments in :\framework\core\extensions\DataValidateExt.class.php
     b. Mobile Dectect Ext, please read the comments in :\framework\core\extensions\MobileDectectExt.class.php
     c. Tools Ext: \framework\core\extensions\ToolsExt.class.php
@@ -96,17 +104,21 @@ version 0.9
             ToolsExt::_d($value, $blnDumpValues = true, $blnDieAfterDebug = false);
 
 6. Widgets for smarty template:
+------------
     a. Suggest in smarty template : {NavWidget::main($data_try_to_send_to, 'widget.you_want_to_call.tpl', $blnAjax, $blnSuccess, $aryExtratrue)}
     b. Example for PHP: \framework\core\widgets\NavWidget.class.php
 
 7. About AJAX:
+------------
     a. Ajax is supported by default, in - [mvc::app()->run('controler_base_name', $data, $blnAjax)]
        [$blnAjax = true] will pass back the result in json format:
        {html : 'export data you want', success : true/false, extra_data_name : extra_data_value, extra_data_name : extra_data_value, etc}
 
 8. Extra suggestion:
+------------
     a. Use as much Wordpress default supported function as possible, such as: $wpdb for db operation, wp_mail for sending email
     b. If you are looking some more powerful tools, you may install Zend framework. It has lots useful tools.
+
 
 I hope you enjoy the framework.
 If you have any suggestion or find any bug, please contact me: hezachary@gmail.com
