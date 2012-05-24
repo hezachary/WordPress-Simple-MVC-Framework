@@ -51,17 +51,17 @@ b.  In your theme files, example: page.php
 ------------
 a. Load local class first:
 
-1. framework\core\ is for core code
-2. framework\local\ is for project code
+1. `framework\core\` is for core code
+2. `framework\local\` is for project code
 3. If local and core has same file and class, local will be load. This rule almost apply to all the classes and files.
 
 b. Locate class by CamelCase:
 
-1.  Last CamelCase name become the base load folder
-2. Classname1Classname2Classname3, will be load in :
-            i.  classname3\Classname1Classname2Classname3 - right
-            ii. classname3\classname1\Classname2Classname3 - right
-            iii.classname3\classname1\classname2\Classname3 - wrong
+1. Last CamelCase name become the base load folder
+2. `Classname1Classname2Classname3`, will be load in :
+1.  `classname3\Classname1Classname2Classname3` - right
+2. `classname3\classname1\Classname2Classname3` - right
+3.`classname3\classname1\classname2\Classname3` - wrong
 
 c. Controler:
         I.  Use post-type as controler name:
