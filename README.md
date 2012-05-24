@@ -82,7 +82,7 @@ c. Controler:
                 \framework\core\controlers\page\HomeController.class.php
                 \framework\core\controlers\page\HomeStatusController.class.php
 
-  3. Retrieve values from defined source with simple filter:
+ 3. Retrieve values from defined source with simple filter:
 
    i. Like most modern mvc, WordPress-Simple-MVC-Framework also support simple way to pass value direct from PHP magic global values
 
@@ -107,18 +107,17 @@ c. Controler:
                  **/
                 public function form(array $post){//Inline area support auto convert array
 
+ 4. Router for choose a method in a controler:
 
-  4. Router for choose a method in a controler:
-
-   i. `$_REQUEST['r']` is the name of the method in the controler
+  i. `$_REQUEST['r']` is the name of the method in the controler
 
     Example: $_REQUEST['r'] = 'form', $objControler->form(array $post)
                 
-   ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
+  ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
 
- d. Model, you can write any model you want, the rules is same as above `4.b`
+d. Model, you can write any model you want, the rules is same as above `4.b`
 
- e. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as `.tpl` uner `\views\`
+e. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as `.tpl` uner `\views\`
     
 Build in useful extension:
 ------------
