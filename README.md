@@ -107,13 +107,14 @@ c. Controler:
                  **/
                 public function form(array $post){//Inline area support auto convert array
 
- 4. Router for choose a method in a controler:
 
-  i. `$_REQUEST['r']` is the name of the method in the controler
+  4. Router for choose a method in a controler:
+
+   i. `$_REQUEST['r']` is the name of the method in the controler
 
     Example: $_REQUEST['r'] = 'form', $objControler->form(array $post)
                 
-  ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
+   ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
 
  d. Model, you can write any model you want, the rules is same as above `4.b`
 
