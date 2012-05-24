@@ -111,7 +111,7 @@ c. Controler:
 
   i. `$_REQUEST['r']` is the name of the method in the controler
 
-    Example: $_REQUEST['r'] = 'form', $objControler->form(array $post)
+    Example: `$_REQUEST['r'] = 'form'`, `$objControler->form(array $post)`
                 
   ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
 
