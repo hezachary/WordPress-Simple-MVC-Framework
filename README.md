@@ -59,16 +59,19 @@ b. Locate class by CamelCase:
 
 1. Last CamelCase name become the base load folder
 2. `Classname1Classname2Classname3`, will be load in :
-1.  `classname3\Classname1Classname2Classname3` - right
-2. `classname3\classname1\Classname2Classname3` - right
-3.`classname3\classname1\classname2\Classname3` - wrong
+
+ i. `classname3\Classname1Classname2Classname3` - right
+ ii. `classname3\classname1\Classname2Classname3` - right
+ iii. `classname3\classname1\classname2\Classname3` - wrong
 
 c. Controler:
-        I.  Use post-type as controler name:
-            i.  mvc::app()->run('page', $post) will load controlers\PageController.class.php
-        II. Use static method `load($objPage, $blnAjax, $aryClassName)` to locate proper class to ini the controler object.
-            Please read : framework\core\base\ControllerBase.class.php comments for `public static function load`
-            Samples: 
+
+1. Use post-type as controler name:
+
+1. mvc::app()->run('page', $post) will load controlers\PageController.class.php
+2. Use static method `load($objPage, $blnAjax, $aryClassName)` to locate proper class to ini the controler object.
+Please read : framework\core\base\ControllerBase.class.php comments for `public static function load`
+Samples: 
             
                 \framework\core\controlers\PageController.class.php
                 \framework\core\controlers\page\HomeController.class.php
