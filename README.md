@@ -13,7 +13,7 @@ Example:
 
 Your project theme : `\wp-content\themes\twentyeleven`
 
-The MVC framework : \wp-content\themes\twentyeleven\framework`
+The MVC framework : `\wp-content\themes\twentyeleven\framework`
 
 After you install the mvc, the `mvc.ini.php` is at `\wp-content\themes\twentyeleven\framework\mvc.ini.php`
 
@@ -50,11 +50,13 @@ b.  In your theme files, example: page.php
 4. How to developing:
 ------------
 a. Load local class first:
+
 1. framework\core\ is for core code
 2. framework\local\ is for project code
 3. If local and core has same file and class, local will be load. This rule almost apply to all the classes and files.
 
 b. Locate class by CamelCase:
+
 1.  Last CamelCase name become the base load folder
 2. Classname1Classname2Classname3, will be load in :
             i.  classname3\Classname1Classname2Classname3 - right
