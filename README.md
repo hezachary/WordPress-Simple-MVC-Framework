@@ -15,17 +15,18 @@ a.  Please copy all the file to your theme folder.
         After you install the mvc, the [mvc.ini.php] is at [\wp-content\themes\twentyeleven\framework\mvc.ini.php]
 
 b.  The MVC also support Zend Framework and Smarty by default, to install them, please:
-a
+
         I.  Zend Framework - Copy all the Zend framework files in \core\libs\Zend
         II. Smarty - Copy all the Smarty files in \core\libs\Smarty
 
 2. Settings:
 ------------
-    a.  Please read the file comments in framework\config
+a.  Please read the file comments in framework\config
 
 3. How to use:
 ------------
-    a. In you functions.php: 
+a. In you functions.php: 
+
         <?php
         require_once(dirname(__FILE__).'/framework/mvc.ini.php');
         
@@ -37,33 +38,38 @@ a
             ToolsExt::_d($value,$blnDumpValues,$blnDieAfterDebug, $debug_backtrace);
         }
         ?>
-    b.  In your theme files, example: page.php
+
+b.  In your theme files, example: page.php
         <?php
         echo mvc::app()->run('page', $post);
         ?>
 
 4. How to developing:
 ------------
-    a. Load local class first:
+a. Load local class first:
         I.  framework\core\ is for core code
         II. framework\local\ is for project code
         III.If local and core has same file and class, local will be load.
             This rule almost apply to all the classes and files.
-    b. Locate class by CamelCase:
+
+b. Locate class by CamelCase:
         I.  Last CamelCase name become the base load folder
         II. Classname1Classname2Classname3, will be load in :
             i.  classname3\Classname1Classname2Classname3 - right
             ii. classname3\classname1\Classname2Classname3 - right
             iii.classname3\classname1\classname2\Classname3 - wrong
-    c. Controler:
+
+c. Controler:
         I.  Use post-type as controler name:
             i.  mvc::app()->run('page', $post) will load controlers\PageController.class.php
         II. Use static method [load($objPage, $blnAjax, $aryClassName)] to locate proper class to ini the controler object.
             Please read : framework\core\base\ControllerBase.class.php comments for [public static function load]
             Samples: 
+            
                 \framework\core\controlers\PageController.class.php
                 \framework\core\controlers\page\HomeController.class.php
                 \framework\core\controlers\page\HomeStatusController.class.php
+
         III. Retrieve values from defined source with simple filter:
             i. Like most modern mvc, WordPress-Simple-MVC-Framework also support simple way to pass value direct from PHP magic global values
                Such as: $_GET, $_POST, etc
@@ -87,7 +93,9 @@ a
             i. $_REQUEST['r'] is the name of the method in the controler
                 Example: $_REQUEST['r'] = 'form', $objControler->form(array $post)
             ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
+
     d. Model, you can write any model you want, the rules is same as above [4.b]
+
     e. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as [.tpl] uner [\views\]
     
 5. Build in useful extension:
