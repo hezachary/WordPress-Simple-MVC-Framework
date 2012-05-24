@@ -1,0 +1,1 @@
+Remove this folder, after you install the mvc framework in your project
