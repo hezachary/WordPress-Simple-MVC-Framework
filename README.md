@@ -47,7 +47,7 @@ b.  In your theme files, example: page.php
         echo mvc::app()->run('page', $post);
         ?>
 
-4. How to developing:
+How to developing:
 ------------
 a. Load local class first:
 
