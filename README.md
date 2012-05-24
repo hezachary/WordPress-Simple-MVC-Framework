@@ -155,6 +155,11 @@ a. Ajax is supported by default, in - `mvc::app()->run('controler_base_name', $d
 
     {html : 'export data you want', success : true/false, extra_data_name : extra_data_value, extra_data_name : extra_data_value, etc}
 
+Mobile Site Support:
+------------
+
+a. The MVC support mobile site by locate views into different directories, Please check `\framework\config\views_path.config.php`
+
 Extra suggestion:
 ------------
 
