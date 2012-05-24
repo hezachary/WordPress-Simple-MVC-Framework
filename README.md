@@ -61,7 +61,9 @@ b. Locate class by CamelCase:
 2. `Classname1Classname2Classname3`, will be load in :
 
  i. `classname3\Classname1Classname2Classname3` - right
+ 
  ii. `classname3\classname1\Classname2Classname3` - right
+ 
  iii. `classname3\classname1\classname2\Classname3` - wrong
 
 c. Controler:
