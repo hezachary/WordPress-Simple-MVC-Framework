@@ -68,24 +68,30 @@ b. Locate class by CamelCase:
 
 c. Controler:
 
-1. Use post-type as controler name:
+1. Use `post-type` as controler name:
 
-1. mvc::app()->run('page', $post) will load controlers\PageController.class.php
+i. `mvc::app()->run('page', $post)` will load `controlers\PageController.class.php`
+
 2. Use static method `load($objPage, $blnAjax, $aryClassName)` to locate proper class to ini the controler object.
-Please read : framework\core\base\ControllerBase.class.php comments for `public static function load`
-Samples: 
-            
+
+Please read : `framework\core\base\ControllerBase.class.php` comments for `public static function load`
+
+    Samples:
                 \framework\core\controlers\PageController.class.php
                 \framework\core\controlers\page\HomeController.class.php
                 \framework\core\controlers\page\HomeStatusController.class.php
 
-        III. Retrieve values from defined source with simple filter:
-            i. Like most modern mvc, WordPress-Simple-MVC-Framework also support simple way to pass value direct from PHP magic global values
-               Such as: $_GET, $_POST, etc
-               The data source is base on supplied info in comments for the method
-               There are two type format involved: 
-               @packed and (@source + @param + @param + @param + ... etc)
-               Example: `core\controlers\page\HomeStatusController.class.php`
+3. Retrieve values from defined source with simple filter:
+
+i. Like most modern mvc, WordPress-Simple-MVC-Framework also support simple way to pass value direct from PHP magic global values
+
+Such as: $_GET, $_POST, etc
+
+The data source is base on supplied info in comments for the method
+
+There are two type format involved: `@packed and (@source + @param + @param + @param + ... etc)`
+
+    Example: `core\controlers\page\HomeStatusController.class.php`
                 /**
                  * @source $_GET
                  * @param $page_id int # you can only put native type here, no object type
@@ -98,18 +104,22 @@ Samples:
                  * In here, it is `$post` - public function form(array $post)
                  **/
                 public function form(array $post){//Inline area support auto convert array
-        IIIV. Router for choose a method in a controler:
-            i. $_REQUEST`'r'` is the name of the method in the controler
+
+4. Router for choose a method in a controler:
+
+i. $_REQUEST`'r'` is the name of the method in the controler
+
                 Example: $_REQUEST`'r'` = 'form', $objControler->form(array $post)
-            ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
+                
+ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
 
-    d. Model, you can write any model you want, the rules is same as above `4.b`
+d. Model, you can write any model you want, the rules is same as above `4.b`
 
-    e. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as `.tpl` uner `\views\`
+e. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as `.tpl` uner `\views\`
     
-5. Build in useful extension:
+Build in useful extension:
 ------------
-    a. Data Validate + Filter Ext, please read the comments in :\framework\core\extensions\DataValidateExt.class.php
+a. Data Validate + Filter Ext, please read the comments in :\framework\core\extensions\DataValidateExt.class.php
     b. Mobile Dectect Ext, please read the comments in :\framework\core\extensions\MobileDectectExt.class.php
     c. Tools Ext: \framework\core\extensions\ToolsExt.class.php
         I. Build array tree:
