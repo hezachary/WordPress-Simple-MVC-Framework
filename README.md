@@ -140,14 +140,14 @@ c. Tools Ext: `\framework\core\extensions\ToolsExt.class.php`
 
             ToolsExt::_d($value, $blnDumpValues = true, $blnDieAfterDebug = false);
 
-6. Widgets for smarty template:
+Widgets for smarty template:
 ------------
 
 a. Suggest in smarty template : `{NavWidget::main($data_try_to_send_to, 'widget.you_want_to_call.tpl', $blnAjax, $blnSuccess, $aryExtratrue)}`
 
 b. Example for PHP: `\framework\core\widgets\NavWidget.class.php`
 
-7. About AJAX:
+About AJAX:
 ------------
 
 a. Ajax is supported by default, in - `mvc::app()->run('controler_base_name', $data, $blnAjax)`
@@ -155,7 +155,7 @@ a. Ajax is supported by default, in - `mvc::app()->run('controler_base_name', $d
 
     {html : 'export data you want', success : true/false, extra_data_name : extra_data_value, extra_data_name : extra_data_value, etc}
 
-8. Extra suggestion:
+Extra suggestion:
 ------------
 
 a. Use as much Wordpress default supported function as possible, such as: `$wpdb` for db operation, `wp_mail()` for sending email
