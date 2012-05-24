@@ -75,8 +75,9 @@ c. Controler:
  2. Use static method `load($objPage, $blnAjax, $aryClassName)` to locate proper class to ini the controler object.
 
   Please read : `framework\core\base\ControllerBase.class.php` comments for `public static function load`
+  
+  Samples:
 
-    Samples:
                 \framework\core\controlers\PageController.class.php
                 \framework\core\controlers\page\HomeController.class.php
                 \framework\core\controlers\page\HomeStatusController.class.php
@@ -91,7 +92,8 @@ c. Controler:
 
    There are two type format involved: `@packed and (@source + @param + @param + @param + ... etc)`
 
-    Example: `core\controlers\page\HomeStatusController.class.php`
+   Example: `core\controlers\page\HomeStatusController.class.php`
+   
                 /**
                  * @source $_GET
                  * @param $page_id int # you can only put native type here, no object type
@@ -107,9 +109,9 @@ c. Controler:
 
  4. Router for choose a method in a controler:
 
-  i. $_REQUEST`'r'` is the name of the method in the controler
+  i. `$_REQUEST['r']` is the name of the method in the controler
 
-                Example: $_REQUEST`'r'` = 'form', $objControler->form(array $post)
+    Example: $_REQUEST['r'] = 'form', $objControler->form(array $post)
                 
   ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
 
@@ -119,11 +121,11 @@ c. Controler:
     
 Build in useful extension:
 ------------
-a. Data Validate + Filter Ext, please read the comments in :\framework\core\extensions\DataValidateExt.class.php
+a. Data Validate + Filter Ext, please read the comments in :`\framework\core\extensions\DataValidateExt.class.php`
 
-b. Mobile Dectect Ext, please read the comments in :\framework\core\extensions\MobileDectectExt.class.php
+b. Mobile Dectect Ext, please read the comments in :`\framework\core\extensions\MobileDectectExt.class.php`
 
-c. Tools Ext: \framework\core\extensions\ToolsExt.class.php
+c. Tools Ext: `\framework\core\extensions\ToolsExt.class.php`
 
  1. Build array tree:
  
@@ -141,9 +143,9 @@ c. Tools Ext: \framework\core\extensions\ToolsExt.class.php
 6. Widgets for smarty template:
 ------------
 
-a. Suggest in smarty template : {NavWidget::main($data_try_to_send_to, 'widget.you_want_to_call.tpl', $blnAjax, $blnSuccess, $aryExtratrue)}
+a. Suggest in smarty template : `{NavWidget::main($data_try_to_send_to, 'widget.you_want_to_call.tpl', $blnAjax, $blnSuccess, $aryExtratrue)}`
 
-b. Example for PHP: \framework\core\widgets\NavWidget.class.php
+b. Example for PHP: `\framework\core\widgets\NavWidget.class.php`
 
 7. About AJAX:
 ------------
@@ -151,12 +153,12 @@ b. Example for PHP: \framework\core\widgets\NavWidget.class.php
 a. Ajax is supported by default, in - `mvc::app()->run('controler_base_name', $data, $blnAjax)`
  `$blnAjax = true` will pass back the result in json format:
 
-       {html : 'export data you want', success : true/false, extra_data_name : extra_data_value, extra_data_name : extra_data_value, etc}
+    {html : 'export data you want', success : true/false, extra_data_name : extra_data_value, extra_data_name : extra_data_value, etc}
 
 8. Extra suggestion:
 ------------
 
-a. Use as much Wordpress default supported function as possible, such as: $wpdb for db operation, wp_mail for sending email
+a. Use as much Wordpress default supported function as possible, such as: `$wpdb` for db operation, `wp_mail()` for sending email
 
 b. If you are looking some more powerful tools, you may install Zend framework. It has lots useful tools.
 
