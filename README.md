@@ -17,7 +17,7 @@ The MVC framework : `\wp-content\themes\twentyeleven\framework`
 
 After you install the mvc, the `mvc.ini.php` is at `\wp-content\themes\twentyeleven\framework\mvc.ini.php`
 
-b.  The MVC also support Zend Framework and Smarty by default, to install them, please:
+b.  The MVC also supports Zend Framework and Smarty by default, to install them, please:
 
  1. Zend Framework - Copy all the Zend framework files in \core\libs\Zend
  2. Smarty - Copy all the Smarty files in \core\libs\Smarty
@@ -113,7 +113,7 @@ c. Controler:
 
     Example: `$_REQUEST['r'] = 'form'`, `$objControler->form(array $post)`
                 
-  ii. By default, $objControler->index() will be called, if nothing is match the router defined controler
+  ii. By default, $objControler->index() will be called, if nothing matches the router defined controler
 
 d. Model, you can write any model you want, the rules is same as above `4.b`
 
