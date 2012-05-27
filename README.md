@@ -53,12 +53,12 @@ a. Load local class first:
 
  1. `framework\core\` is for core code
  2. `framework\local\` is for project code
- 3. If local and core has same file and class, local will be load. This rule almost apply to all the classes and files.
+ 3. If local and core have same files and classes, local will be loaded. This rule almost apply to all the classes and files.
 
 b. Locate class by CamelCase:
 
- 1. Last CamelCase name become the base load folder
- 2. `Classname1Classname2Classname3`, will be load in :
+ 1. Last CamelCase name becomes the base load folder
+ 2. `Classname1Classname2Classname3`, will be loaded in :
 
   i. `classname3\Classname1Classname2Classname3` - right
  
@@ -84,13 +84,13 @@ c. Controler:
 
  3. Retrieve values from defined source with simple filter:
 
-   i. Like most modern mvc, WordPress-Simple-MVC-Framework also support simple way to pass value direct from PHP magic global values
+   i. Like most modern mvc, WordPress-Simple-MVC-Framework also supports simple way to pass value direct from PHP magic global values
 
    Such as: $_GET, $_POST, etc
 
-   The data source is base on supplied info in comments for the method
+   The data source bases on supplied info in comments for the method
 
-   There are two type format involved: `@packed and (@source + @param + @param + @param + ... etc)`
+   There are two types format involved: `@packed and (@source + @param + @param + @param + ... etc)`
 
    Example: `core\controlers\page\HomeStatusController.class.php`
    
@@ -109,15 +109,15 @@ c. Controler:
 
  4. Router for choose a method in a controler:
 
-  i. `$_REQUEST['r']` is the name of the method in the controler
+  i. `$_REQUEST['r']` is the name of the method in controler
 
     Example: `$_REQUEST['r'] = 'form'`, `$objControler->form(array $post)`
                 
-  ii. By default, $objControler->index() will be call, if nothing is match the router defined controler
+  ii. By default, $objControler->index() will be called, if nothing is match the router defined controler
 
 d. Model, you can write any model you want, the rules is same as above `4.b`
 
-e. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as `.tpl` uner `\views\`
+e. WordPress-Simple-MVC-Framework only supports Smarty as view at the moment, for all the smarty files, please name the extension as `.tpl` uner `\views\`
     
 Build in useful extension:
 ------------
@@ -143,7 +143,7 @@ c. Tools Ext: `\framework\core\extensions\ToolsExt.class.php`
 Widgets for smarty template:
 ------------
 
-a. Suggest in smarty template : `{NavWidget::main($data_try_to_send_to, 'widget.you_want_to_call.tpl', $blnAjax, $blnSuccess, $aryExtratrue)}`
+a. Suggestion for smarty template : `{NavWidget::main($data_try_to_send_to, 'widget.you_want_to_call.tpl', $blnAjax, $blnSuccess, $aryExtratrue)}`
 
 b. Example for PHP: `\framework\core\widgets\NavWidget.class.php`
 
@@ -158,7 +158,7 @@ a. Ajax is supported by default, in - `mvc::app()->run('controler_base_name', $d
 Mobile Site Support:
 ------------
 
-a. The MVC support mobile site by locate views into different directories, Please check `\framework\config\views_path.config.php`
+a. The MVC supports mobile site by locate views into different directories, Please check `\framework\config\views_path.config.php`
 
 Extra suggestion:
 ------------
