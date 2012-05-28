@@ -10,6 +10,7 @@
  * @package System
  */
 class mvc_ini{
+    const DIR_SEP = DIRECTORY_SEPARATOR;
     public $view_path;
     public $strMvcRootPath = array();
     public $aryPathList = array();
@@ -17,16 +18,16 @@ class mvc_ini{
     
     public function loadConfig(){
         $this->strMvcRootPath = dirname(__FILE__);
-        $this->view_path = require_once(dirname(__FILE__).'/config/views_path.config.php');
-        $this->aryPathList = require_once(dirname(__FILE__).'/config/path.config.php');
-        $this->aryClassDefine = require_once(dirname(__FILE__).'/config/class_path.config.php');
+        $this->view_path = require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'views_path.config.php');
+        $this->aryPathList = require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'path.config.php');
+        $this->aryClassDefine = require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'class_path.config.php');
         
-        $this->setProjectSecurity(require_once(dirname(__FILE__).'/config/project_security.config.php'));
+        $this->setProjectSecurity(require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'project_security.config.php'));
     }
     
     public function loadByPath($strLoadPath, $blnReturnPath = false, $blnOnceOnly = true){
         foreach($this->aryPathList as $strPath){
-            $strFullPath = $this->strMvcRootPath.'/'.$strPath.'/'.$strLoadPath;
+            $strFullPath = $this->strMvcRootPath . self::DIR_SEP .$strPath . self::DIR_SEP .$strLoadPath;
             if(file_exists($strFullPath)){
                 if($blnReturnPath) return $strFullPath;
                 $blnOnceOnly ? require_once($strFullPath) : include($strFullPath);
@@ -39,8 +40,8 @@ class mvc_ini{
     protected function loadFile($strBasePath, $aryClassName, $strClassBase){
         if(!is_array($aryClassName) || sizeof($aryClassName) < 1) return false;
         $strClassName = basename(implode('', $aryClassName));
-        if(!$this->loadByPath($strBasePath.'/'.$strClassName.'.class.php')){
-            return $this->loadFile($strBasePath.'/'.strtolower(array_shift($aryClassName)), $aryClassName, $strClassBase);
+        if(!$this->loadByPath($strBasePath . self::DIR_SEP .$strClassName.'.class.php')){
+            return $this->loadFile($strBasePath . self::DIR_SEP .strtolower(array_shift($aryClassName)), $aryClassName, $strClassBase);
         }else{
             return true;
         }
@@ -59,7 +60,7 @@ class mvc_ini{
             if ($dh = opendir($dir)) {
                 $aryDirList = array();
                 while (($file = readdir($dh)) !== false) {
-                    $strFullPath = $dir.'/'.$file;
+                    $strFullPath = $dir . self::DIR_SEP .$file;
                     switch(true){
                         case $file == '.htaccess':
                             if($fileHtaccess === null) $fileHtaccess = $strFullPath;
@@ -74,8 +75,8 @@ class mvc_ini{
                             break;
                     }
                 }
-                if($strCurrentFileHtaccess != $fileHtaccess && $fileHtaccess) copy($fileHtaccess, $dir.'/.htaccess');
-                if($strCurrentFileIndexHtml != $fileIndexHtml && $fileIndexHtml) copy($fileIndexHtml, $dir.'/index.html');
+                if($strCurrentFileHtaccess != $fileHtaccess && $fileHtaccess) copy($fileHtaccess, $dir . self::DIR_SEP .'.htaccess');
+                if($strCurrentFileIndexHtml != $fileIndexHtml && $fileIndexHtml) copy($fileIndexHtml, $dir . self::DIR_SEP .'index.html');
                 foreach($aryDirList as $strDir){
                     $this->resetProjectSecurity($strDir, $fileHtaccess, $fileIndexHtml);
                 }
@@ -84,6 +85,6 @@ class mvc_ini{
         }
     }
 }
-require_once(dirname(__FILE__).'/core/mvc.class.php');
+require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR .'core' . DIRECTORY_SEPARATOR .'mvc.class.php');
 
 

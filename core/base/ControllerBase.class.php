@@ -8,6 +8,8 @@
  * @package System
  */
 class ControllerBase{
+    const DIR_SEP = DIRECTORY_SEPARATOR;
+    
     protected $_smarty;
     public $blnAjax;
     public $source_data;
@@ -45,8 +47,8 @@ class ControllerBase{
     public function smarty(){
         if(!($this->_smarty instanceof Smarty)){
             $this->_smarty = new Smarty();
-            $this->_smarty->compile_dir = mvc::app()->getUploadPath() . '/compile';
-            $this->_smarty->cache_dir = mvc::app()->getUploadPath() . '/cache';
+            $this->_smarty->compile_dir = mvc::app()->getUploadPath() . self::DIR_SEP . 'compile';
+            $this->_smarty->cache_dir = mvc::app()->getUploadPath() . self::DIR_SEP . 'cache';
             $this->_smarty->force_compile = true;
             $this->_smarty->template_dir = mvc::app()->loadByPath(mvc::app()->view_path, true);
             
@@ -57,7 +59,7 @@ class ControllerBase{
     public function view($strTemplateName = null){
         $strTemplateName = $strTemplateName ? $strTemplateName : $this->strTemplateName;
         
-        $this->smarty()->template_dir = dirname(mvc::app()->loadByPath(mvc::app()->view_path.'/'.$strTemplateName, 1));
+        $this->smarty()->template_dir = dirname(mvc::app()->loadByPath(mvc::app()->view_path.self::DIR_SEP.$strTemplateName, 1));
         
         $this->smarty()->assign('this', $this->smarty());
         $this->smarty()->assign('objController', $this);

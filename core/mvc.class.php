@@ -96,7 +96,7 @@ class mvc extends mvc_ini{
     }
     
     public function loadClassByPath($strFileId){
-        $strFileId = str_replace('.', '/', basename($strFileId)); 
+        $strFileId = str_replace('.', self::DIR_SEP, basename($strFileId)); 
         return $this->loadByPath($strFileId.'.class.php');
     }
     
@@ -109,14 +109,14 @@ class mvc extends mvc_ini{
         $aryClassName = explode('_', $classname);
         switch($aryClassName[0]){
             case 'Zend':
-                $this->loadByPath('libs/Zend/Loader.php');
+                $this->loadByPath('libs' . self::DIR_SEP . 'Zend' . self::DIR_SEP . 'Loader.php');
                 Zend_Loader::loadClass($classname, $this->loadByPath('libs', 1));
                 break;
             case 'Smarty':
-                $this->loadByPath('libs/Smarty/Smarty.class.php');
+                $this->loadByPath('libs' . self::DIR_SEP . 'Smarty' . self::DIR_SEP . 'Smarty.class.php');
                 break;
             case 'Facebook':
-                $this->loadByPath('libs/Facebook/facebook.php');
+                $this->loadByPath('libs' . self::DIR_SEP . 'Facebook' . self::DIR_SEP . 'facebook.php');
                 break;
             default:
                 foreach($this->aryClassDefine as $strClassBase => $strBasePath){
