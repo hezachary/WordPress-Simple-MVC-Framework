@@ -196,7 +196,7 @@ f. View:
  2. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as [.tpl] uner [\views\]
     
     
-Build in useful extension:
+Build-in useful extension:
 ------------
 a. Data Validate + Filter Ext, please read the comments in :`\framework\core\extensions\DataValidateExt.class.php`
 
