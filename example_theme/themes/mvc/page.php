@@ -12,5 +12,4 @@
  * @since 
  */
 echo mvc::app()->run('page', $post);
-
 ?>

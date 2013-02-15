@@ -39,6 +39,11 @@ class ControllerBase{
         }
     }
     
+    public function loadExistTemplate($strTemplateFileName){
+        $strTemplateFileName = mvc::app()->loadByPath(mvc::app()->view_path.self::DIR_SEP.$strTemplateFileName, 1);
+        $this->strTemplateName = $strTemplateFileName ? basename($strTemplateFileName) : $this->strTemplateName;
+    }
+    
     public function render($blnStatic = true){
         $this->strExport = $blnStatic && $this->strExport ? $this->strExport : ($this->blnAjax ? $this->ajax() : $this->view());
         return $this->strExport;
@@ -49,7 +54,8 @@ class ControllerBase{
             $this->_smarty = new Smarty();
             $this->_smarty->compile_dir = mvc::app()->getUploadPath() . self::DIR_SEP . 'compile';
             $this->_smarty->cache_dir = mvc::app()->getUploadPath() . self::DIR_SEP . 'cache';
-            $this->_smarty->force_compile = true;
+            $this->_smarty->force_compile = false;
+            $this->_smarty->force_cache = false;
             $this->_smarty->template_dir = mvc::app()->loadByPath(mvc::app()->view_path, true);
             
         }
@@ -61,6 +67,8 @@ class ControllerBase{
         
         $this->smarty()->template_dir = dirname(mvc::app()->loadByPath(mvc::app()->view_path.self::DIR_SEP.$strTemplateName, 1));
         
+        $this->smarty()->assign('SITEURL', site_url());
+        $this->smarty()->assign('THEMEPATH', get_bloginfo('stylesheet_directory'));
         $this->smarty()->assign('this', $this->smarty());
         $this->smarty()->assign('objController', $this);
         $this->smarty()->assign(get_object_vars($this));

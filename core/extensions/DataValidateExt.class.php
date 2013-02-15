@@ -184,13 +184,13 @@ class DataValidateExt{
                             }
                         }
                         $strValidateFieldSettings = $strSign{0}.implode(',,', $aryRange).$strSign{1};
-                        $strFieldValue = self::rangeValidation(strtotime($strFieldValueOrg), $strValidateFieldSettings) ? $strFieldValue : false;
+                        $strFieldValue = self::rangeValidation(strtotime($strFieldValueOrg), $strValidateFieldSettings) ? $strFieldValueOrg : false;
                     }
                 }
                 break;
             case 'phone':
                 $phoneReg = "/^(\+\d{2}[ \-]{0,1}){0,1}(((\({0,1}[ \-]{0,1})0{0,1}\){0,1}[2|3|7|8]{1}\){0,1}[ \-]*(\d{4}[ \-]{0,1}\d{4}))|(1[ \-]{0,1}(300|800|900|902)[ \-]{0,1}((\d{6})|(\d{3}[ \-]{0,1}\d{3})))|(13[ \-]{0,1}([\d \-]{5})|((\({0,1}[ \-]{0,1})0{0,1}\){0,1}4{1}[\d \-]{8,10})))$/";
-                $strFieldValue = preg_match($phoneReg, $strFieldValue) ? $strFieldValue : false;
+                $strFieldValue = preg_match($phoneReg, $strFieldValueOrg) ? $strFieldValueOrg : false;
                 break;
         }
         return $strFieldValue;

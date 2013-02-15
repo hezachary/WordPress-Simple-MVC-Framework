@@ -20,13 +20,16 @@ class WidgetBase{
             self::$_smarty = new Smarty();
             self::$_smarty->compile_dir = mvc::app()->getUploadPath() . self::DIR_SEP . 'compile';
             self::$_smarty->cache_dir = mvc::app()->getUploadPath() . self::DIR_SEP . 'cache';
-            self::$_smarty->force_compile = true;
+            self::$_smarty->force_compile = false;
+            self::$_smarty->force_cache = false;
         }
         return self::$_smarty;
     }
     
     public function view($strTemplateName = null, $data){
         self::smarty()->template_dir = dirname(mvc::app()->loadByPath(mvc::app()->view_path. self::DIR_SEP .$strTemplateName), 1);
+        self::smarty()->assign('SITEURL', site_url());
+        self::smarty()->assign('THEMEPATH', get_bloginfo('stylesheet_directory'));
         self::smarty()->assign($data);
         return self::smarty()->fetch($strTemplateName);
     }

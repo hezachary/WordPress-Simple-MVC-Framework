@@ -19,7 +19,8 @@ class mvc extends mvc_ini{
     public static function app(){
         if(!(self::$_instance instanceof self)){
             self::$_instance = new self();
-            self::$_instance->router = basename($_REQUEST['r']);
+            self::$_instance->router = basename(get_query_var('r'));
+            self::$_instance->router = self::$_instance->router ? self::$_instance->router : basename($_REQUEST['r']);
             self::$_instance->loadConfig();
             
             $aryUploadPath = wp_upload_dir();
@@ -30,14 +31,17 @@ class mvc extends mvc_ini{
         return self::$_instance;
     }
     
+    public function resetRouter($strRouter){
+        $this->router = basename($strRouter);
+    }
+    
     public function run($strType, $objData = null, $blnAjax = false){
+        //if(defined(W3TC_LIB_W3_DIR)) $this->pageCaching();
         if($strType){
             $objControler = ControllerBase::load($objData, $blnAjax, array($strType, 'Controller'));
-            if($this->router && method_exists($objControler, $this->router)){
-                call_user_func_array(array($objControler, $this->router), $this->parseMethod(get_class($objControler), $this->router));
-            }else{
-                $objControler->index();
-            }
+            $router = $this->router && method_exists($objControler, $this->router) ? $this->router : 'index';
+            list($aryValueList, $blnPacked, $arySourceList) = $this->parseMethod(get_class($objControler), $router);
+            call_user_func_array(array($objControler, $router), $aryValueList);
             return $objControler->render();
         }else{
             return false;
@@ -84,8 +88,7 @@ class mvc extends mvc_ini{
                 if(!$objParameter->getClass() && $aryParamPreset[$objParameter->name]){
                     settype($GLOBALS[strtoupper($strSource)][$objParameter->name], $aryParamPreset[$objParameter->name]);
                 }
-                
-                $aryValueList[] = $GLOBALS[strtoupper($strSource)][$objParameter->name];
+                $aryValueList[] = get_query_var($objParameter->name) ? get_query_var($objParameter->name) : $GLOBALS[strtoupper($strSource)][$objParameter->name];
             }
         }
         return array($aryValueList, $blnPacked, $arySourceList);

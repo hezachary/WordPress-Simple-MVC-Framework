@@ -1,0 +1,33 @@
+.accessibility{
+    display: none;
+}
+.clear{
+    font-size: 0;
+    line-height: 0;
+    height: 0;
+    float: none;
+    display: block;
+    clear: both;
+}
+.gap{
+    display: block;
+    clear: both;
+    font: 0/0 arial;
+    height: 26px;
+    float: none;
+}
+body
+{
+	background: #edebed url(../images/bg.gif) repeat;
+	/*background: #8888ff none repeat;*/
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+    margin: 0;
+    color: #6a6a6a;
+}
+a{
+    text-decoration: none;
+}
+.no_href{
+    cursor: default;
+}

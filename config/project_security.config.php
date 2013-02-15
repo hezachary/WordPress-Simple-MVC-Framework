@@ -5,4 +5,4 @@
  * @warning Please set back to true, once you finish the job
  * Otherwise, it may slow the performance
  **/
-return false;
+return true;

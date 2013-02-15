@@ -15,13 +15,11 @@ class mvc_ini{
     public $strMvcRootPath = array();
     public $aryPathList = array();
     public $aryClassDefine = array();
+    public $aryImageSizeList = array();
     
     public function loadConfig(){
         $this->strMvcRootPath = dirname(__FILE__);
-        $this->view_path = require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'views_path.config.php');
-        $this->aryPathList = require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'path.config.php');
-        $this->aryClassDefine = require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'class_path.config.php');
-        
+        require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'config.php');
         $this->setProjectSecurity(require_once(dirname(__FILE__) . self::DIR_SEP .'config' . self::DIR_SEP . 'project_security.config.php'));
     }
     
@@ -83,6 +81,12 @@ class mvc_ini{
                 closedir($dh);
             }
         }
+    }
+    
+    public function pageCaching(){
+        require_once W3TC_LIB_W3_DIR . '/PgCacheFlush.php';
+        $w3_pgcache = new W3_PgCacheFlush();
+        $w3_pgcache->process();
     }
 }
 require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR .'core' . DIRECTORY_SEPARATOR .'mvc.class.php');
