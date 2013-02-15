@@ -3,7 +3,7 @@ WordPress-Simple-MVC-Framework
 
 A simple MVC framework for Wordpress, support static class methods, merged with Smarty Template.
 WordPress-Simple-MVC-Framework is under MIT Copyright (c) 2012 Zhehai He <hezahcary@gmail.com>
-version 0.9
+version 0.91
 
 Installation:
 ------------
@@ -21,10 +21,13 @@ b.  The MVC also supports Zend Framework and Smarty by default, to install them,
 
  1. Zend Framework - Copy all the Zend framework files in \core\libs\Zend
  2. Smarty - Copy all the Smarty files in \core\libs\Smarty
+            -- http://www.smarty.net/download
 
 Settings:
 ------------
 a.  Please read the file comments in framework\config
+    I. For Url Rewrite: router.config.php
+       http://codex.wordpress.org/Class_Reference/WP_Rewrite
 
 How to use:
 ------------
@@ -32,7 +35,19 @@ a. In you functions.php:
 
         <?php
         require_once(dirname(__FILE__).'/framework/mvc.ini.php');
-        
+        ImageModel::loadImageSize(mvc::app()->aryImageSizeList);
+        ImageModel::loadAdmin(mvc::app()->aryImageSizeList);
+        UrlModel::loadRule(mvc::app()->aryRouterList);
+        TaxonomyModel::loadTaxonomy(mvc::app()->aryTaxonomyList);
+        /**
+         * For load image via cloudfront cdn
+         * @usage: 
+         * $aryImageAttr = cdn_get_attachment_image_src($intImageId, $size);
+         * echo '<img src="'.aryImageAttr[0].'" alt=""/>';
+         **/
+        function cdn_get_attachment_image_src($intImageId, $size='thumbnail', $icon = false){
+            return ImageModel::wp_get_attachment_image_src($intImageId, $size, $icon, mvc::app()->aryCDNSettings['cloudfront_host']);
+        }
         /**
          * For easy debug
          **/
@@ -82,7 +97,23 @@ c. Controler:
                 \framework\core\controlers\page\HomeController.class.php
                 \framework\core\controlers\page\HomeStatusController.class.php
 
- 3. Retrieve values from defined source with simple filter:
+ 3. Use Post Name (post-slug) as \page\ controller sub name, [-] will be replace with [_]
+    The name conversion in code: preg_replace('/\W/', '_', ucfirst(strtolower($post_name)))
+    
+    Samples:
+    
+                Post name [product-detail]
+                 - Controller Location: \framework\local\controlers\page\Product_detailController.class.php
+                 - In file Class: class PageProduct_detailController extends ControllerBase { ... }
+    
+    Caution:
+    
+                Do not use any invalid value name as Post Name, such as:
+                 - 2way-drive - wrong
+                 - 10-speed-bicycle - wrong
+                 - drive-2way - right
+                 
+ 4. Retrieve values from defined source with simple filter:
 
    i. Like most modern mvc, WordPress-Simple-MVC-Framework also supports simple way to pass value direct from PHP magic global values
 
@@ -107,17 +138,63 @@ c. Controler:
                  **/
                 public function form(array $post){//Inline area support auto convert array
 
+    Reminder: If you use Wordpress Url Rewrite, the value will auto pass into the packed data or the source you defined
+
  4. Router for choose a method in a controler:
 
-  i. `$_REQUEST['r']` is the name of the method in controler
+   i. `$_REQUEST['r']` is the name of the method in controler
 
     Example: `$_REQUEST['r'] = 'form'`, `$objControler->form(array $post)`
                 
-  ii. By default, $objControler->index() will be called, if nothing matches the router defined controler
+   ii. By default, $objControler->index() will be called, if nothing matches the router defined controler
+
+
+ 5. Load View:
+  
+   i. Please use $this->strTemplateName to define view file.
+  
+   ii. All the view files are under [\framework\local\views\] directory
+  
+ 6. Load the Controller as you want, such as - use it in a plugin, or a cron job:
+ 
+   i. Create you custom Controller base and Controller, example: \framework\local\controlers\my_custom_admin\TestController.class.php
+  
+   ii. In the code to load the controller:
+  
+                $objTest = new stdClass();
+                $objTest->router = 'Test'; //The controller you want to load
+                mvc::app()->resetRouter('the_method');//The method you want to load
+                echo mvc::app()->run('my_custom_admin', $objTest);//pass in the controler base and object, export page as string
+                exit();
+
+ 7. Suggestion about ACL (Access Control Lists):
+ 
+   i. Use the controller entry as the filter:
+  
+                public static function load($objPage, $blnAjax, $aryClassName){
+                    //you may put you logical in here
+                    //decided to load current controller or redirect
+                    //example:
+                    if(is_user_logged_in()){
+                        parent::load($objPage, $blnAjax, get_class(), get_class());
+                    }else{
+                        $aryUrlQuery['redirect_to'] = urlencode($_SERVER['REQUEST_URI']);
+                        wp_redirect(str_replace('http://', 'http://', get_permalink(get_page_by_path('/login')->ID)).'?'.http_build_query($aryUrlQuery));
+                        exit();
+                    }
+                }
+
 
 d. Model, you can write any model you want, the rules is same as above `4.b`
 
 e. WordPress-Simple-MVC-Framework only supports Smarty as view at the moment, for all the smarty files, please name the extension as `.tpl` uner `\views\`
+
+f. View:
+
+ 1. All the view files is under [\framework\local\views\] directory
+ 
+ 2. WordPress-Simple-MVC-Framework only support Smarty as view at the moment, all the smarty files please name the extension as [.tpl] uner [\views\]
+    
     
 Build in useful extension:
 ------------
@@ -167,7 +244,15 @@ a. Use as much Wordpress default supported function as possible, such as: `$wpdb
 
 b. If you are looking some more powerful tools, you may install Zend framework. It has lots useful tools.
 
+The WP plugins highly recommanded for developing with WordPress-Simple-MVC-Framework
+------------
 
+a. Advanced Custom Fields
+
+b. CPT-onomies: Using Custom Post Types as Taxonomies
+
+c. Rewrite Rules Inspector
+    
 I hope you enjoy the framework.
 
 If you have any suggestion or find any bug, please contact me: hezachary@gmail.com
