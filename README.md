@@ -5,6 +5,8 @@ A simple MVC framework for Wordpress, support static class methods, merged with 
 WordPress-Simple-MVC-Framework is under MIT Copyright (c) 2012 Zhehai He <hezahcary@gmail.com>
 version 0.91
 
+If you are looking for plugin solution, please check <https://github.com/hezachary/WordPress-Simple-MVC-Framework-PlugIn-Mode>
+
 Installation:
 ------------
 a.  Please copy all the file to your theme folder.
